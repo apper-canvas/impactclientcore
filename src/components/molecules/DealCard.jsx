@@ -1,0 +1,71 @@
+import Card from "@/components/atoms/Card";
+import Badge from "@/components/atoms/Badge";
+import Button from "@/components/atoms/Button";
+import ApperIcon from "@/components/ApperIcon";
+import { format } from "date-fns";
+
+const DealCard = ({ deal, contact, onEdit, onDelete, draggable = true }) => {
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(amount);
+  };
+
+  return (
+    <Card 
+      hoverable 
+      className={`p-4 mb-3 ${draggable ? "cursor-move" : ""} bg-gradient-to-br from-surface to-gray-50`}
+      draggable={draggable}
+    >
+      <div className="flex justify-between items-start mb-3">
+        <h4 className="font-semibold text-primary text-sm">{deal.title}</h4>
+        <div className="flex gap-1">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => onEdit(deal)}
+            className="p-1"
+          >
+            <ApperIcon name="Edit" size={14} />
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => onDelete(deal.Id)}
+            className="p-1 text-error hover:bg-error/10"
+          >
+            <ApperIcon name="Trash2" size={14} />
+          </Button>
+        </div>
+      </div>
+      
+      <div className="space-y-2">
+        <div className="flex items-center justify-between">
+          <span className="text-lg font-bold bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent">
+            {formatCurrency(deal.value)}
+          </span>
+          <Badge variant="info">{deal.probability}%</Badge>
+        </div>
+        
+        {contact && (
+          <div className="flex items-center text-sm text-gray-600">
+            <ApperIcon name="User" size={14} className="mr-2" />
+            {contact.firstName} {contact.lastName}
+          </div>
+        )}
+        
+        <div className="flex items-center text-sm text-gray-600">
+          <ApperIcon name="Calendar" size={14} className="mr-2" />
+          {format(new Date(deal.expectedCloseDate), "MMM dd, yyyy")}
+        </div>
+        
+        {deal.notes && (
+          <p className="text-sm text-gray-600 line-clamp-2">{deal.notes}</p>
+        )}
+      </div>
+    </Card>
+  );
+};
+
+export default DealCard;

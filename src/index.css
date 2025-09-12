@@ -1,0 +1,50 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import 'react-toastify/dist/ReactToastify.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.Toastify__toast-container {
+  width: 350px;
+  font-size: 14px;
+  z-index: 9999;
+}
+
+.Toastify__toast {
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.Toastify__progress-bar {
+  height: 3px;
+}
+
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #00b894, #00cec9);
+  color: white;
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #e84393, #fd79a8);
+  color: white;
+}
+
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #74b9ff, #0984e3);
+  color: white;
+}
+
+.Toastify__toast--warning {
+  background: linear-gradient(135deg, #fdcb6e, #e17055);
+  color: white;
+}
