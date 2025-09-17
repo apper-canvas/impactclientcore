@@ -139,8 +139,8 @@ const Contacts = () => {
       <Header
         onMenuClick={onMenuClick}
         title="Contacts"
-        subtitle={`Manage your ${contacts.length} contacts and build stronger relationships`}
-        actions={headerActions}
+subtitle={`Manage your ${contacts.length} contacts and build stronger relationships`}
+        actions={[...headerActions, ...(onMenuClick?.logoutAction ? [onMenuClick.logoutAction] : [])]}
       />
       
       <div className="p-6">

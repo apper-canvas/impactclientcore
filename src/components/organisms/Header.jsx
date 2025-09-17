@@ -28,8 +28,7 @@ const Header = ({ onMenuClick, title, subtitle, actions = [] }) => {
             )}
           </div>
         </div>
-        
-        <div className="flex items-center gap-4">
+<div className="flex items-center gap-4">
           <SearchBar
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}

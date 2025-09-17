@@ -141,8 +141,9 @@ const Deals = () => {
     <div className="min-h-screen bg-gradient-to-br from-background to-gray-100">
       <Header
         onMenuClick={onMenuClick}
-        title="Deals Pipeline"
+title="Deals Pipeline"
         subtitle={`Track your ${deals.length} deals through the sales process`}
+        actions={[...headerActions, ...(onMenuClick?.logoutAction ? [onMenuClick.logoutAction] : [])]}
         actions={headerActions}
       />
       

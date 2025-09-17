@@ -1,20 +1,21 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import Header from "@/components/organisms/Header";
-import MetricCard from "@/components/molecules/MetricCard";
-import Card from "@/components/atoms/Card";
-import Button from "@/components/atoms/Button";
-import ActivityItem from "@/components/molecules/ActivityItem";
-import DealCard from "@/components/molecules/DealCard";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
-import Empty from "@/components/ui/Empty";
-import ApperIcon from "@/components/ApperIcon";
 import { contactService } from "@/services/api/contactService";
 import { dealService } from "@/services/api/dealService";
 import { activityService } from "@/services/api/activityService";
 import { toast } from "react-toastify";
-
+import ApperIcon from "@/components/ApperIcon";
+import Activities from "@/components/pages/Activities";
+import Deals from "@/components/pages/Deals";
+import Header from "@/components/organisms/Header";
+import MetricCard from "@/components/molecules/MetricCard";
+import ActivityItem from "@/components/molecules/ActivityItem";
+import DealCard from "@/components/molecules/DealCard";
+import Button from "@/components/atoms/Button";
+import Card from "@/components/atoms/Card";
+import Empty from "@/components/ui/Empty";
+import Loading from "@/components/ui/Loading";
+import Error from "@/components/ui/Error";
 const Dashboard = () => {
   const { onMenuClick } = useOutletContext();
   const navigate = useNavigate();
@@ -65,16 +66,22 @@ const Dashboard = () => {
       totalPipelineValue,
       wonDeals
     };
+};
+
+  const formatCurrency = (value) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(value || 0);
   };
 
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(amount);
-  };
+  const headerActions = [
+    {
+      label: "Add Contact",
+      icon: "UserPlus",
+      onClick: () => navigate("/contacts")
+    }
+  ];
 
   const getContactById = (id) => {
     return contacts.find(contact => contact.Id === id);
@@ -87,27 +94,12 @@ const Dashboard = () => {
   const recentDeals = deals
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 3);
+const metrics = calculateMetrics();
 
-  if (loading) return <Loading type="cards" />;
+  if (loading) return <Loading />;
   if (error) return <Error message={error} onRetry={loadDashboardData} />;
 
-  const metrics = calculateMetrics();
-
-  const headerActions = [
-    {
-      label: "Add Contact",
-      icon: "UserPlus",
-      onClick: () => navigate("/contacts"),
-      variant: "primary"
-    },
-    {
-      label: "Add Deal",
-      icon: "Plus",
-      onClick: () => navigate("/deals"),
-      variant: "outline"
-    }
-  ];
-
+  return (
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-gray-100">
       <Header

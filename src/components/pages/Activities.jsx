@@ -166,8 +166,8 @@ const Activities = () => {
       <Header
         onMenuClick={onMenuClick}
         title="Activities"
-        subtitle={`Track all customer interactions and stay organized with ${activities.length} logged activities`}
-        actions={headerActions}
+subtitle={`Track all customer interactions and stay organized with ${activities.length} logged activities`}
+        actions={[...headerActions, ...(onMenuClick?.logoutAction ? [onMenuClick.logoutAction] : [])]}
       />
       
       <div className="p-6">
