@@ -99,8 +99,7 @@ const metrics = calculateMetrics();
   if (loading) return <Loading />;
   if (error) return <Error message={error} onRetry={loadDashboardData} />;
 
-  return (
-  return (
+return (
     <div className="min-h-screen bg-gradient-to-br from-background to-gray-100">
       <Header
         onMenuClick={onMenuClick}
